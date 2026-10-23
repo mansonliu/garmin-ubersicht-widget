@@ -37,8 +37,10 @@ const card = css`
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 14px;
   padding: 14px 16px 12px;
-  min-height: 150px;
+  height: 196px;            /* 四張卡等高；圖表用 margin-top:auto 貼底 */
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 `;
 const head = css`
   display: flex;
@@ -85,7 +87,8 @@ const foot = css`
   text-align: right;
 `;
 const chartBox = css`
-  margin-top: 8px;
+  margin-top: auto;
+  padding-top: 8px;
 `;
 
 function fmtHM(min) {
@@ -106,7 +109,7 @@ function delta(cur, prev) {
 }
 
 // 今日心率折線
-function Sparkline({ series, w = 228, h = 36 }) {
+function Sparkline({ series, w = 228, h = 64 }) {
   if (!series || series.length < 2) return null;
   const min = Math.min(...series), max = Math.max(...series);
   const span = Math.max(1, max - min);
